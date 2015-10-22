@@ -1,0 +1,49 @@
+#!/usr/bin/expect
+
+spawn ./serverSpeederInstaller.sh
+
+expect {
+  "ServerSpeeder has been installed" {
+    send "\r"
+    exp_continue
+  }
+  "Email address:" {
+    send "{{ serverspeeder_user.email }}\r"
+    exp_continue
+  }
+  "Password:" {
+    send "{{ serverspeeder_user.passwd }}\r"
+    exp_continue
+  }
+  "the most likly image is" {
+    send "y\r"
+    exp_continue
+  }
+  "Enter your accelerated interface" {
+    send "{{ ansible_default_ipv4.interface }}\r"
+    exp_continue
+  }
+  "Enter your outbound bandwidth" {
+    send "\r"
+    exp_continue
+  }
+  "Enter your inbound bandwidth" {
+    send "\r"
+    exp_continue
+  }
+  "Configure shortRtt-bypass" {
+    send "\r"
+    exp_continue
+  }
+  "Auto load ServerSpeeder on linux start-up" {
+    send "y\r"
+    exp_continue
+  }
+  "Run ServerSpeeder now" {
+    send "n\r"
+    exp_continue
+  } eof {
+    exit
+  }
+}
+interact return

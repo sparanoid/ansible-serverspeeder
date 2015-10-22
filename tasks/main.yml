@@ -1,0 +1,40 @@
+---
+- name: install dependencies
+  yum: name={{ item }}
+  with_items: serverspeeder_dependencies
+  tags: prepare
+
+- name: download package
+  get_url: url={{ serverspeeder_url }}
+           dest=/tmp/serverSpeederInstaller.tar.gz
+  with_items: nginx_sites.{{ inventory_hostname }}
+  tags:
+    - prepare
+
+- name: unarchive
+  unarchive: src=/tmp/serverSpeederInstaller.tar.gz
+             dest=/tmp/
+             mode=755
+             copy=no
+  tags:
+    - prepare
+
+- name: get default interface
+  debug: msg={{ ansible_default_ipv4.interface }}
+  tags: debug
+
+- name: upload .expect script
+  template: src=serverspeeder.expect
+            dest=/tmp/serverspeeder.expect
+            mode=755
+  tags: prepare
+
+- name: setup serverspeeder
+  shell: ./serverspeeder.expect
+  args:
+    chdir: /tmp/
+  tags: setup
+
+- name: start serverspeeder
+  shell: /serverspeeder/bin/serverSpeeder.sh start
+  tags: setup
