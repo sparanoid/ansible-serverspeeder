@@ -23,18 +23,8 @@
   debug: msg={{ ansible_default_ipv4.interface }}
   tags: debug
 
-- name: upload .expect script
-  template: src=serverspeeder.expect
-            dest=/tmp/serverspeeder.expect
-            mode=755
-  tags: prepare
-
 - name: setup serverspeeder
-  shell: ./serverspeeder.expect
+  shell: ./serverSpeederInstaller.sh -e {{ serverspeeder_user.email }} -p {{ serverspeeder_user.passwd }} -i {{ ansible_default_ipv4.interface }} -r -b -f
   args:
     chdir: /tmp/
-  tags: setup
-
-- name: start serverspeeder
-  shell: /serverspeeder/bin/serverSpeeder.sh start
   tags: setup
