@@ -1,7 +1,5 @@
 # Ansible Role: ServerSpeeder
 
-[![Build Status](https://travis-ci.org/sparanoid/ansible-serverspeeder.svg)](https://travis-ci.org/sparanoid/ansible-serverspeeder)
-
 Install ServerSpeeder via Ansible.
 
 ## Features
