@@ -1,4 +1,2 @@
 ---
 serverspeeder_url: http://my.serverspeeder.com/d/ls/serverSpeederInstaller.tar.gz
-serverspeeder_dependencies:
-  - expect

@@ -1,9 +1,4 @@
 ---
-- name: install dependencies
-  yum: name={{ item }}
-  with_items: serverspeeder_dependencies
-  tags: prepare
-
 - name: download package
   get_url: url={{ serverspeeder_url }}
            dest=/tmp/serverSpeederInstaller.tar.gz
