@@ -2,7 +2,6 @@
 - name: download package
   get_url: url={{ serverspeeder_url }}
            dest=/tmp/serverSpeederInstaller.tar.gz
-  with_items: nginx_sites.{{ inventory_hostname }}
   tags:
     - prepare
 
